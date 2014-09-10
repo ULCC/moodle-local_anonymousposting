@@ -30,12 +30,11 @@ defined('MOODLE_INTERNAL') || die;
  * Limit navigation to the forum context for anonymous users
  * Add new nodes to the settings blocks using javascript (Yui3 Node)
  *
- * @global moodle_user $USER
  * @global moodle_page $PAGE
  * @param navigation_node $nav Current navigation object
  */
-function anonymousposting_extends_navigation ($nav) {
-    global $USER, $PAGE, $SESSION;
+function local_anonymousposting_extends_navigation ($nav) {
+    global $PAGE, $SESSION;
     
     // Check if we need to manipulate the DOM for adding links for managers and users
     if ($PAGE->context->contextlevel == CONTEXT_MODULE and get_config('local_anonymousposting', 'enabled')){
