@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die;
  * @global moodle_page $PAGE
  * @param navigation_node $nav Current navigation object
  */
-function local_anonymousposting_extends_navigation ($nav) {
+function local_anonymousposting_extend_navigation ($nav) {
     global $PAGE, $SESSION;
     
     // Check if we need to manipulate the DOM for adding links for managers and users
