@@ -36,7 +36,7 @@ $PAGE->set_url('/local/anonymousposting/forum.php', array('id' => $id,'enabled' 
 
 require_login($course, false, $cm); // needed to setup proper $COURSE
 
-$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = context_module::instance($cm->id);
 require_capability('moodle/course:manageactivities', $context);
 
 $strenableordisable = get_string('enableordisable', 'local_anonymousposting');

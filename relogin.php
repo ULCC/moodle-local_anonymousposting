@@ -31,7 +31,7 @@ $PAGE->set_url('/local/anonymousposting/relogin.php');
 $cmid = $SESSION->aucontext->instanceid;
 $cm = get_coursemodule_from_id('', $cmid, 0, false, MUST_EXIST);
 $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
-$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = context_module::instance($cm->id);
 
 require_login($course, false, $cm); // needed to setup proper $COURSE
 
@@ -71,7 +71,7 @@ if ($USER->auth == 'nologin') {
     
     $user = get_complete_user_data('id', $user->id);    
     $user->loginascontext = $context;
-    session_set_user($user);
+    \core\session\manager::set_user($user);
 
     $strloginas    = get_string('loginas');
     $strloggedinas = get_string('loggedinas', '', fullname($user));

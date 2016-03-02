@@ -37,7 +37,7 @@ $PAGE->set_url('/local/anonymousposting/changeuser.php', array('id' => $id, 'act
 
 require_login($course, false, $cm); // needed to setup proper $COURSE
 
-$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = context_module::instance($cm->id);
 
 $return = new moodle_url('/mod/forum/view.php', array('id' => $id));
 
@@ -125,7 +125,7 @@ if ($confirm and confirm_sesskey()) {
     $_SESSION['AUREALUSER'] = $_SESSION['USER'];
     $user = get_complete_user_data('id', $user->id);    
     $user->loginascontext = $context;
-    session_set_user($user);
+    \core\session\manager::set_user($user);
     
     $SESSION->aucontext = $context;
     $SESSION->autime = time();
@@ -141,8 +141,7 @@ if ($confirm and confirm_sesskey()) {
 }
 
 echo $OUTPUT->header();
-
-if (session_is_loggedinas()) {
+if (core\session\manager::is_loggedinas()) {
     print_error('youcannouseloginas', 'local_anonymousposting');
 } else {
     $msg = get_string('strchangeusermsg', 'local_anonymousposting');
